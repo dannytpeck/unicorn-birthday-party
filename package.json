@@ -4,6 +4,7 @@
   "description": "",
   "author": "Danny Peck and Josh Braun",
   "main": "index.js",
+  "repository": "https://github.com/dannytpeck/unicorn-birthday-party",
   "scripts": {
     "start": "webpack",
     "build": "webpack --config webpack.production.config.js",
