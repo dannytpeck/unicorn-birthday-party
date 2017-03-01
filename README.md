@@ -1,37 +1,18 @@
-# Phaser + ES6 + Webpack.
-#### A bootstrap project to create games with Phaser + ES6 + Webpack.
-
-![Phaser+ES6+Webpack](https://raw.githubusercontent.com/lean/phaser-es6-webpack/master/assets/images/phaser-es6-webpack.jpg)
-
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-
-
-## Features
-- ESLINT with JavaScript Standard Style configuration
-- Next generation of Javascript
-- Webpack ready
-- Multiple browser testing
-- WebFont Loader
-
+# Unicorn Birthday Party
+#### A whimsical game about a Unicorn
 
 # Setup
 Navigate into your workspace directory.
 
-## 1. Clone the repo:
-
-Run:
+### 1. Clone the repo:
 
 ```git clone https://github.com/dannytpeck/unicorn-birthday-party.git```
 
-## 2. Install the dependencies
-
-Run:
+### 2. Install the dependencies
 
 ```npm install```
 
-## 3. Run the development server:
-
-Run:
+### 3. Run the development server:
 
 ```npm start```
 
@@ -41,15 +22,13 @@ Open your browser and enter localhost:3000 into the address bar.
 
 Also this will start a watch process, so you can change the source and the process will recompile and refresh the browser
 
-## Build for deployment:
-
-Run:
+### Build for deployment:
 
 ```npm run build```
 
 This will optimize and minimize the compiled bundle.
 
-## Credits
+### Credits
 Big thanks to this great repos:
 
 https://github.com/lean/phaser-es6-webpack
