@@ -6,12 +6,7 @@ import Player from '../sprites/Player';
 export default class extends Phaser.State {
   init() {}
 
-  preload() {
-    this.load.image('sky', 'assets/images/sky.png');
-    this.load.image('ground', 'assets/images/platform.png');
-    this.load.image('star', 'assets/images/star.png');
-    this.load.spritesheet('dude', 'assets/images/dude.png', 32, 48);
-  }
+  preload() {}
 
   create () {
     //  We're going to be using physics, so enable the Arcade Physics system
