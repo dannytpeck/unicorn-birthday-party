@@ -29,13 +29,11 @@ class GameState extends Phaser.State {
     ground.body.immovable = true;
 
     //  Now let's create two ledges
-    let ledge = this.platforms.create(400, 432, 'ground');
+    let ledge = this.platforms.create(400, 384, 'ground');
     ledge.body.immovable = true;
 
-    ledge = this.platforms.create(-150, 250, 'ground');
-    ledge.body.immovable = true;
-    
-    this.platforms.create(964, 432, 'ground').body.immovable = true;
+    this.platforms.create(-128, this.game.world.height - 176, 'ground').body.immovable = true;
+    this.platforms.create(900, this.game.world.height - 256, 'ground').body.immovable = true;
 
     // The player and its settings
     this.player = new Player(this.game, 32, this.game.world.height - 150, 'dude');
