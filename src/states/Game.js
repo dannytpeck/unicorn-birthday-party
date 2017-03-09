@@ -8,7 +8,13 @@ class GameState extends Phaser.State {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
-    this.game.add.sprite(0, 0, 'sky');
+    //this.game.add.sprite(0, 0, 'sky');
+    
+    // fill entire space with a tiled 'sky' sprite
+    this.game.add.tileSprite(0, 0, 1600, 600, 'sky');
+    
+    // set game world bounds larger than screen
+    this.game.world.setBounds(0, 0, 1600, 600);
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     this.platforms = this.game.add.group();
@@ -54,6 +60,13 @@ class GameState extends Phaser.State {
     this.scoreText = this.game.add.text(16, 16, 'score: 0', { fontSize: '40px', fill: '#000' });
     this.scoreText.font = 'Bangers';
     this.scoreText.padding.set(32, 32);
+    
+    // Camera code
+    //  Notice that the sprite doesn't have any momentum at all,
+    //  it's all just set by the camera follow type.
+    //  0.1 is the amount of linear interpolation to use.
+    //  The smaller the value, the smooth the camera (and the longer it takes to catch up)
+    this.game.camera.follow(this.player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
   }
 
   update() {
@@ -62,8 +75,7 @@ class GameState extends Phaser.State {
     this.game.physics.arcade.collide(this.stars, this.platforms);
 
     // Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    //this.game.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
-    this.game.physics.arcade.collide(this.player, this.stars);
+    this.game.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
   }
 
   render() {
