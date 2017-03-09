@@ -20,9 +20,12 @@ class Player extends Phaser.Sprite {
     this.animations.add('turn', [4], 20, true);
     this.animations.add('right', [5, 6, 7, 8], 10, true);
     
-    // Our controls
-    this.cursors = game.input.keyboard.createCursorKeys();
-    this.jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    // Player controls
+    this.jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    this.upKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
+    this.downKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+    this.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+    this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
     this.facing = 'left';
     this.jumpTimer = 0;
     
@@ -34,14 +37,14 @@ class Player extends Phaser.Sprite {
     // Reset the players velocity (movement)
     this.body.velocity.x = 0;
 
-    if (this.cursors.left.isDown) {
+    if (this.leftKey.isDown) {
       this.body.velocity.x = -150;
 
       if (this.facing != 'left') {
         this.animations.play('left');
         this.facing = 'left';
       }
-    } else if (this.cursors.right.isDown) {
+    } else if (this.rightKey.isDown) {
       this.body.velocity.x = 150;
 
       if (this.facing != 'right') {
@@ -61,7 +64,7 @@ class Player extends Phaser.Sprite {
       }
     }
     
-    if (this.jumpButton.isDown && this.body.touching.down && this.game.time.now > this.jumpTimer) {
+    if (this.jumpKey.isDown && this.body.touching.down && this.game.time.now > this.jumpTimer) {
       this.body.velocity.y = -500;
       this.jumpTimer = this.game.time.now + 750;
     }
