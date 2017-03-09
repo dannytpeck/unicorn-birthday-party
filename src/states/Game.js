@@ -2,12 +2,8 @@
 import Phaser from 'phaser';
 import Player from '../sprites/Player';
 
-export default class extends Phaser.State {
-  init() {}
-
-  preload() {}
-
-  create () {
+class GameState extends Phaser.State {
+  create() {
     //  We're going to be using physics, so enable the Arcade Physics system
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -66,7 +62,8 @@ export default class extends Phaser.State {
     this.game.physics.arcade.collide(this.stars, this.platforms);
 
     // Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    this.game.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
+    //this.game.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
+    this.game.physics.arcade.collide(this.player, this.stars);
   }
 
   render() {
@@ -84,3 +81,5 @@ export default class extends Phaser.State {
     this.scoreText.text = 'Score: ' + this.score;
   }
 }
+
+export default GameState;
