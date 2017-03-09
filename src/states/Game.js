@@ -62,6 +62,7 @@ class GameState extends Phaser.State {
     this.scoreText = this.game.add.text(16, 16, 'score: 0', { fontSize: '40px', fill: '#000' });
     this.scoreText.font = 'Bangers';
     this.scoreText.padding.set(32, 32);
+    this.scoreText.fixedToCamera = true;
     
     // Camera code
     // Notice that the sprite doesn't have any momentum at all,
