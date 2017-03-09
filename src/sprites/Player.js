@@ -64,7 +64,7 @@ class Player extends Phaser.Sprite {
       }
     }
     
-    if (this.jumpKey.isDown && this.body.touching.down && this.game.time.now > this.jumpTimer) {
+    if ((this.upKey.isDown || this.jumpKey.isDown) && this.body.touching.down && this.game.time.now > this.jumpTimer) {
       this.body.velocity.y = -500;
       this.jumpTimer = this.game.time.now + 750;
     }
