@@ -68,7 +68,6 @@ class Player extends Phaser.Sprite {
       this.body.velocity.y = -500;
     }
   }
-
 }
 
 export default Player;
