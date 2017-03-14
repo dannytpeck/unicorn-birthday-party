@@ -10,7 +10,7 @@ class GameState extends Phaser.State {
     // Background
     this.game.stage.backgroundColor = '#000000';
 
-    let bg = this.game.add.tileSprite(0, 0, 800, 600, 'background');
+    let bg = this.game.add.tileSprite(0, 0, 800, 600, 'sky');
     bg.fixedToCamera = true;
 
     let map = this.game.add.tilemap('level1');
@@ -18,7 +18,7 @@ class GameState extends Phaser.State {
     map.setCollisionByExclusion([13, 14, 15, 16, 46, 47, 48, 49, 50, 51]);
 
     this.layer = map.createLayer('Tile Layer 1');
-    this.layer.debug = true; // Show collision tiles
+    // this.layer.debug = true; // Show collision areas for this layer
     this.layer.resizeWorld();
 
     // The platforms group contains the ground and the 2 ledges we can jump on
@@ -44,28 +44,27 @@ class GameState extends Phaser.State {
     this.game.add.existing(this.player);
 
     // Finally some stars to collect
-    // this.stars = this.game.add.group();
+    this.stars = this.game.add.group();
     // We will enable physics for any star that is created in this group
-    // this.stars.enableBody = true;
+    this.stars.enableBody = true;
     // Here we'll create 12 of them evenly spaced apart
-    /*
     for (let i = 0; i < 12; i++) {
-        //  Create a star inside of the 'stars' group
-        let star = this.stars.create(i * 70, 0, 'star');
+      // Create a star inside of the 'stars' group
+      let star = this.stars.create(i * (Math.random() * 5 + 70), Math.random() * 70, 'star');
 
-        //  Let gravity do its thing
-        star.body.gravity.y = 300;
+      // Let gravity do its thing
+      star.body.gravity.y = 300;
 
-        //  This just gives each star a slightly random bounce value
-        star.body.bounce.y = 0.7 + Math.random() * 0.2;
+      // This just gives each star a slightly random bounce value
+      star.body.bounce.y = 0.7 + Math.random() * 0.2;
     }
-    */
 
     // The score
-    // this.score = 0;
-    // this.scoreText = this.game.add.text(16, 16, 'score: 0', { fontSize: '40px', fill: '#000' });
-    // this.scoreText.font = 'Bangers';
-    // this.scoreText.padding.set(32, 32);
+    this.score = 0;
+    this.scoreText = this.game.add.text(16, 16, 'score: 0', { fontSize: '40px', fill: '#000' });
+    this.scoreText.font = 'Bangers';
+    this.scoreText.padding.set(32, 32);
+    this.scoreText.fixedToCamera = true;
 
     // The Camera
     // 0.1 is the amount of linear interpolation to use.
@@ -74,22 +73,20 @@ class GameState extends Phaser.State {
   }
 
   update() {
-    // Collide the player with the Tiled map layer
+    // Collide the player and the stars with the Tiled map layer
     this.player.hitPlatform = this.game.physics.arcade.collide(this.player, this.layer);
-    // Collide the player and the stars with the platforms
-    // this.game.physics.arcade.collide(this.player, this.platforms);
-    // this.game.physics.arcade.collide(this.stars, this.platforms);
+    this.game.physics.arcade.collide(this.stars, this.layer);
 
     // Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    // this.game.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
+    this.game.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
   }
 
   render() {
     if (__DEV__) {
       // this.game.debug.spriteInfo(this.player, this.game.world.width - 360, 32);
       // this.game.debug.text(game.time.physicsElapsed, 32, 32);
-      this.game.debug.body(this.player);
-      this.game.debug.bodyInfo(this.player, 16, 24);
+      // this.game.debug.body(this.player); // Shows green outline of player collision area
+      // this.game.debug.bodyInfo(this.player, 16, 24); // Shows detailed data about player object
     }
   }
 
