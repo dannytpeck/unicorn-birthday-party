@@ -36,6 +36,12 @@ class Player extends Phaser.Sprite {
   update() {
     // Reset the players velocity (movement)
     this.body.velocity.x = 0;
+    
+    // Decrement jumpTimer but not lower than 0
+    this.jumpTimer--;
+    if (this.jumpTimer < 0) {
+      this.jumpTimer = 0;
+    }
 
     if (this.leftKey.isDown) {
       this.body.velocity.x = -150;
@@ -64,9 +70,9 @@ class Player extends Phaser.Sprite {
       }
     }
     
-    if ((this.upKey.isDown || this.jumpKey.isDown) && this.body.touching.down && this.game.time.now > this.jumpTimer) {
+    if ((this.upKey.isDown || this.jumpKey.isDown) && this.body.touching.down && this.jumpTimer === 0) {
       this.body.velocity.y = -500;
-      this.jumpTimer = this.game.time.now + 750;
+      this.jumpTimer = 60;
     }
   }
 
