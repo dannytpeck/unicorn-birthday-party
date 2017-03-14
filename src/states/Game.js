@@ -9,10 +9,10 @@ class GameState extends Phaser.State {
 
     //  A simple background for our game
     //this.game.add.sprite(0, 0, 'sky');
-    
+
     // fill entire space with a tiled 'sky' sprite
     this.game.add.tileSprite(0, 0, 1600, 600, 'sky');
-    
+
     // set game world bounds larger than screen
     this.game.world.setBounds(0, 0, 1600, 600);
 
@@ -61,7 +61,7 @@ class GameState extends Phaser.State {
     this.scoreText.font = 'Bangers';
     this.scoreText.padding.set(32, 32);
     this.scoreText.fixedToCamera = true;
-    
+
     // Camera code
     // Notice that the sprite doesn't have any momentum at all,
     // it's all just set by the camera follow type.
@@ -72,7 +72,7 @@ class GameState extends Phaser.State {
 
   update() {
     // Collide the player and the stars with the platforms
-    this.game.physics.arcade.collide(this.player, this.platforms);
+    this.player.hitPlatform = this.game.physics.arcade.collide(this.player, this.platforms);
     this.game.physics.arcade.collide(this.stars, this.platforms);
 
     // Checks to see if the player overlaps with any of the stars, if he does call the collectStar function

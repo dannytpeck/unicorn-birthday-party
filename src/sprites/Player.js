@@ -19,7 +19,7 @@ class Player extends Phaser.Sprite {
     this.animations.add('left', [0, 1, 2, 3], 10, true);
     this.animations.add('turn', [4], 20, true);
     this.animations.add('right', [5, 6, 7, 8], 10, true);
-    
+
     // Player controls
     this.jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     this.upKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -27,8 +27,8 @@ class Player extends Phaser.Sprite {
     this.leftKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
     this.rightKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
     this.facing = 'left';
-    this.jumpTimer = 0;
-    
+    this.hitPlatform = false;
+
     // Saving the variable for use in update()
     this.game = game;
   }
@@ -36,32 +36,26 @@ class Player extends Phaser.Sprite {
   update() {
     // Reset the players velocity (movement)
     this.body.velocity.x = 0;
-    
-    // Decrement jumpTimer but not lower than 0
-    this.jumpTimer--;
-    if (this.jumpTimer < 0) {
-      this.jumpTimer = 0;
-    }
 
     if (this.leftKey.isDown) {
       this.body.velocity.x = -150;
 
-      if (this.facing != 'left') {
+      if (this.facing !== 'left') {
         this.animations.play('left');
         this.facing = 'left';
       }
     } else if (this.rightKey.isDown) {
       this.body.velocity.x = 150;
 
-      if (this.facing != 'right') {
+      if (this.facing !== 'right') {
         this.animations.play('right');
         this.facing = 'right';
       }
     } else {
-      if (this.facing != 'idle') {
+      if (this.facing !== 'idle') {
         this.animations.stop();
 
-        if (this.facing == 'left') {
+        if (this.facing === 'left') {
           this.frame = 0;
         } else {
           this.frame = 5;
@@ -69,10 +63,9 @@ class Player extends Phaser.Sprite {
         this.facing = 'idle';
       }
     }
-    
-    if ((this.upKey.isDown || this.jumpKey.isDown) && this.body.touching.down && this.jumpTimer === 0) {
+
+    if ((this.upKey.isDown || this.jumpKey.isDown) && this.body.touching.down && this.hitPlatform) {
       this.body.velocity.y = -500;
-      this.jumpTimer = 60;
     }
   }
 
