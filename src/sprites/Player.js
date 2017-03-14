@@ -63,8 +63,8 @@ class Player extends Phaser.Sprite {
         this.facing = 'idle';
       }
     }
-    ///(this.leftKey.downDuration(250))
-    if ((this.upKey.downDuration(10) || this.jumpKey.downDuration(10)) && this.body.touching.down && this.hitPlatform) {
+
+    if ((this.upKey.downDuration(10) || this.jumpKey.downDuration(10)) && this.body.onFloor() && this.hitPlatform) {
       this.body.velocity.y = -500;
     }
   }
