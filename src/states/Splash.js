@@ -18,12 +18,12 @@ class SplashState extends Phaser.State {
     this.load.image('ground', 'assets/images/platform.png');
     this.load.image('star', 'assets/images/star.png');
     this.load.image('star2', 'assets/images/star2.png');
-    this.load.image('tiles-1', 'assets/images/tiles-1.png');
-    
-    this.load.spritesheet('dude', 'assets/images/dude.png', 32, 48);
+    this.load.image('forest-tiles', 'assets/images/forest-tiles.png');
+
+    this.load.image('player', 'assets/images/player.png');
     this.load.spritesheet('droid', 'assets/images/droid.png', 32, 32);
-    
-    this.load.tilemap('level1', 'assets/tiled/level1.json', null, Phaser.Tilemap.TILED_JSON);
+
+    this.load.tilemap('forest-level', 'assets/tiled/forest-level.json', null, Phaser.Tilemap.TILED_JSON);
   }
 
   create() {

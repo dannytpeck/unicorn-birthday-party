@@ -13,8 +13,8 @@ class GameState extends Phaser.State {
     let bg = this.game.add.tileSprite(0, 0, 800, 600, 'sky');
     bg.fixedToCamera = true;
 
-    let map = this.game.add.tilemap('level1');
-    map.addTilesetImage('tiles-1');
+    let map = this.game.add.tilemap('forest-level');
+    map.addTilesetImage('forest-tiles');
     map.setCollisionByExclusion([13, 14, 15, 16, 46, 47, 48, 49, 50, 51]);
 
     this.layer = map.createLayer('Tile Layer 1');
@@ -40,7 +40,7 @@ class GameState extends Phaser.State {
     // ledge.body.immovable = true;
 
     // The player and its settings
-    this.player = new Player(this.game, 32, 32, 'dude');
+    this.player = new Player(this.game, 32, 32, 'player');
     this.game.add.existing(this.player);
 
     // Finally some stars to collect
@@ -77,15 +77,16 @@ class GameState extends Phaser.State {
     this.player.hitPlatform = this.game.physics.arcade.collide(this.player, this.layer);
     this.game.physics.arcade.collide(this.stars, this.layer);
 
-    // Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
+    // Checks to see if the player overlaps with any of the stars, if he does
+    // call the collectStar function
     this.game.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
   }
 
   render() {
     if (__DEV__) {
+      // this.game.debug.body(this.player); // Shows green outline of player collision area
       // this.game.debug.spriteInfo(this.player, this.game.world.width - 360, 32);
       // this.game.debug.text(game.time.physicsElapsed, 32, 32);
-      // this.game.debug.body(this.player); // Shows green outline of player collision area
       // this.game.debug.bodyInfo(this.player, 16, 24); // Shows detailed data about player object
     }
   }

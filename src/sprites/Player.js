@@ -14,7 +14,7 @@ class Player extends Phaser.Sprite {
    */
   constructor(game, x, y, asset) {
     super(game, x, y, asset);
-    this.anchor.setTo(0.5);
+    this.anchor.setTo(0.5, 0.5);
 
     // We need to enable physics on the player
     game.physics.arcade.enable(this);
@@ -23,12 +23,16 @@ class Player extends Phaser.Sprite {
     this.body.collideWorldBounds = true;
     this.body.gravity.y = 1000;
     this.body.maxVelocity.y = 500;
-    this.body.setSize(20, 32, 5, 16);
+    this.body.setSize(24, 24, 6, -1);
+
+    // Scale up to 2x
+    this.scale.x = 2;
+    this.scale.y = 2;
 
     // Player animations
-    this.animations.add('left', [0, 1, 2, 3], 10, true);
-    this.animations.add('turn', [4], 20, true);
-    this.animations.add('right', [5, 6, 7, 8], 10, true);
+    // this.animations.add('left', [0, 1, 2, 3], 10, true);
+    // this.animations.add('turn', [4], 20, true);
+    // this.animations.add('right', [5, 6, 7, 8], 10, true);
 
     // Player controls
     this.jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -54,19 +58,21 @@ class Player extends Phaser.Sprite {
       this.body.velocity.x = -150;
 
       if (this.facing !== 'left') {
-        this.animations.play('left');
+        // this.animations.play('left');
         this.facing = 'left';
+        this.scale.x = -2;
       }
     } else if (this.rightKey.isDown) {
       this.body.velocity.x = 150;
 
       if (this.facing !== 'right') {
-        this.animations.play('right');
+        // this.animations.play('right');
         this.facing = 'right';
+        this.scale.x = 2;
       }
     } else {
       if (this.facing !== 'idle') {
-        this.animations.stop();
+        // this.animations.stop();
 
         if (this.facing === 'left') {
           this.frame = 0;
