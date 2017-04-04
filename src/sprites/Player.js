@@ -1,7 +1,17 @@
 import Phaser from 'phaser';
 
+/**
+ * Class representing the player.
+ */
 class Player extends Phaser.Sprite {
 
+  /**
+   * Create a player.
+   * @param {game} game - The game object.
+   * @param {number} x - Initial x value.
+   * @param {number} y - Initial y value.
+   * @param {string} asset - The sprite to use.
+   */
   constructor(game, x, y, asset) {
     super(game, x, y, asset);
     this.anchor.setTo(0.5);
@@ -33,6 +43,9 @@ class Player extends Phaser.Sprite {
     this.game = game;
   }
 
+  /**
+   * Update (runs every frame)
+   */
   update() {
     // Reset the players velocity (movement)
     this.body.velocity.x = 0;
@@ -64,7 +77,8 @@ class Player extends Phaser.Sprite {
       }
     }
 
-    if ((this.upKey.downDuration(10) || this.jumpKey.downDuration(10)) && this.body.onFloor() && this.hitPlatform) {
+    if ((this.upKey.downDuration(10) || this.jumpKey.downDuration(10))
+    && this.body.onFloor() && this.hitPlatform) {
       this.body.velocity.y = -500;
     }
   }
