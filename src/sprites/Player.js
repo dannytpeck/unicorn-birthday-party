@@ -33,6 +33,11 @@ class Player extends Phaser.Sprite {
     // this.animations.add('left', [0, 1, 2, 3], 10, true);
     // this.animations.add('turn', [4], 20, true);
     // this.animations.add('right', [5, 6, 7, 8], 10, true);
+    
+
+    // jump variables
+    this.jumpCount = 0;
+    this.maxJump = 1;
 
     // Player controls
     this.jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -83,10 +88,18 @@ class Player extends Phaser.Sprite {
       }
     }
 
+    // makes player jump if on platform or ground
     if ((this.upKey.downDuration(10) || this.jumpKey.downDuration(10))
-    && this.body.onFloor() && this.hitPlatform) {
+    && this.jumpCount !== this.maxJump ) {
+      this.jumpCount += 1;
       this.body.velocity.y = -500;
     }
+
+    // resets jumpCount when on ground/platform
+    if (this.body.onFloor && this.hitPlatform) {
+      this.jumpCount = 0;
+    }
+
   }
 }
 
